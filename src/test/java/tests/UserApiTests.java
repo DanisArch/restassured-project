@@ -15,12 +15,12 @@ public class UserApiTests extends ApiBaseTest {
 
     @Test
     public void testGetUserById() {
-        Response response = apiWrapper.getUserById(1);
+        Response response = apiWrapper.getUserById(50);
         assertEquals(200, response.getStatusCode());
 
         UserDTO user = response.as(UserDTO.class);
         assertNotNull(user);
-        assertEquals(1, user.getId());
+        assertEquals(50, user.getId());
     }
 
     @Test
