@@ -1,6 +1,6 @@
 package wrappers;
 
-import dto.UserDTO;
+import dto.User;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
@@ -14,7 +14,7 @@ public class ApiWrapper {
                 .thenReturn();
     }
 
-    public Response createUser(UserDTO user) {
+    public Response createUser(User user) {
         return given()
                 .body(user)
                 .post("/users")

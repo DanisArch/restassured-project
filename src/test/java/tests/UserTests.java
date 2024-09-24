@@ -1,7 +1,6 @@
 package tests;
 
-import tests.ApiBaseTest;
-import dto.UserDTO;
+import dto.User;
 import wrappers.ApiWrapper;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class UserApiTests extends ApiBaseTest {
+public class UserTests extends ApiBaseTest {
 
     private ApiWrapper apiWrapper = new ApiWrapper();
 
@@ -18,21 +17,21 @@ public class UserApiTests extends ApiBaseTest {
         Response response = apiWrapper.getUserById(50);
         assertEquals(200, response.getStatusCode());
 
-        UserDTO user = response.as(UserDTO.class);
+        User user = response.as(User.class);
         assertNotNull(user);
         assertEquals(50, user.getId());
     }
 
     @Test
     public void testRegisterUser() {
-        UserDTO newUser = new UserDTO();
+        User newUser = new User();
         newUser.setName("John Doe");
         newUser.setEmail("john@example.com");
 
         Response response = apiWrapper.createUser(newUser);
         assertEquals(201, response.getStatusCode());
 
-        UserDTO createdUser = response.as(UserDTO.class);
+        User createdUser = response.as(User.class);
         assertEquals("John Doe", createdUser.getName());
     }
 
