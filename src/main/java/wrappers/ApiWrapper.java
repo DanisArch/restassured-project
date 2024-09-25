@@ -1,10 +1,150 @@
 package wrappers;
 
+import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
+import filters.AuthenticationFilter;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import dto.User;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class ApiWrapper {
+    private final static int DEFAULT_STATUS_CODE_GET = 200;
+    private final static int DEFAULT_STATUS_CODE_PATCH = 200;
+    private final static int DEFAULT_STATUS_CODE_POST = 201;
+    private final static int DEFAULT_STATUS_CODE_PUT = 200;
+    private final static int DEFAULT_STATUS_CODE_DELETE = 204;
+    public final static String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyMzI3fSwiaWF0IjoxNzI3MTkwMjEwLCJleHAiOjE3Mjc1NTAyMTB9.614R0BxpzLIScZeU6cEby7MRp5rCH3lr2X-Ne7W8UQw";
+
+    public static <T> T sendPostRequest(RequestSpecification requestSpec,
+                                        String endpoint,
+                                        T requestBody,
+                                        int statusCode,
+                                        Class<T> responseType) {
+        return given()
+                .filter(new AuthenticationFilter(TOKEN))
+                .spec(requestSpec)
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .when()
+                .post(endpoint)
+                .then()
+                .assertThat()
+                .statusCode(statusCode)
+                .contentType(ContentType.JSON)
+                .log().ifValidationFails()
+                .extract().as(responseType);
+    }
+    public static <T> T sendPostRequest(String endpoint, T requestBody, Class<T> responseType) {
+
+        return sendPostRequest(given(), endpoint, requestBody, DEFAULT_STATUS_CODE_POST, responseType);
+    }
+
+    public static <T> T sendPostRequest(String endpoint, T requestBody, int statusCode, Class<T> responseType) {
+
+        return sendPostRequest(given(), endpoint, requestBody, statusCode, responseType);
+    }
+
+    public static <T> T sendPostRequest(RequestSpecification requestSpec, String endpoint, T requestBody, Class<T> responseType) {
+
+        return sendPostRequest(requestSpec, endpoint, requestBody, DEFAULT_STATUS_CODE_POST, responseType);
+    }
+
+    public static <T> T sendPutRequest(RequestSpecification requestSpec,
+                                       String endpoint,
+                                       T requestBody,
+                                       Class<T> responseType) {
+        return given()
+                .filter(new AuthenticationFilter(TOKEN))
+                .spec(requestSpec)
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .when()
+                .put(endpoint)
+                .then()
+                .assertThat()
+                .statusCode(DEFAULT_STATUS_CODE_PUT)
+                .contentType(ContentType.JSON)
+                .log().ifValidationFails()
+                .extract().as(responseType);
+    }
+
+    public static ValidatableResponse sendPatchRequest(RequestSpecification requestSpec,
+                                                       String nameCheckedField,
+                                                       String valueCheckedField,
+                                                       String callPath,
+                                                       int statusCode) {
+        return given()
+                .filter(new AuthenticationFilter(TOKEN))
+                .spec(requestSpec)
+                .body("{ \"" + nameCheckedField + "\": \"" + valueCheckedField + "\" }")
+                .contentType(ContentType.JSON)
+                .when()
+                .patch(callPath)
+                .then()
+                .statusCode(statusCode)
+                .contentType(ContentType.JSON)
+                .log().ifValidationFails()
+                .body(nameCheckedField, equalTo(valueCheckedField));
+    }
+
+    public static ValidatableResponse sendPatchRequest(RequestSpecification requestSpec,
+                                                       String nameCheckedField,
+                                                       String valueCheckedField,
+                                                       String callPath
+    ) {
+        return sendPatchRequest(requestSpec,
+                nameCheckedField,
+                valueCheckedField,
+                callPath,
+                DEFAULT_STATUS_CODE_PATCH);
+    }
+
+    public static ValidatableResponse sendGetRequest(RequestSpecification requestSpec,
+                                                     String callPath,
+                                                     int statusCode) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .get(callPath)
+                .then()
+                .statusCode(statusCode)
+                .contentType(ContentType.JSON)
+                .log().ifValidationFails();
+    }
+
+    public static ValidatableResponse sendGetRequest(String callPath, int statusCode) {
+        return sendGetRequest(given(), callPath, statusCode);
+    }
+
+    public static ValidatableResponse sendGetRequest(RequestSpecification requestSpec, String callPath) {
+        return sendGetRequest(requestSpec, callPath, DEFAULT_STATUS_CODE_GET);
+    }
+
+    public static ValidatableResponse sendGetRequest(String callPath) {
+        return sendGetRequest(given(), callPath, DEFAULT_STATUS_CODE_GET);
+    }
+
+    public static void deleteRequest(RequestSpecification requestSpec,
+                                     String callPath,
+                                     int statusCode) {
+        given()
+                .filter(new AuthenticationFilter(TOKEN))
+                .spec(requestSpec)
+                .when()
+                .delete(callPath)
+                .then()
+                .log().ifValidationFails()
+                .statusCode(statusCode);
+    }
+
+    public static void deleteRequest(RequestSpecification requestSpec, String callPath) {
+        deleteRequest(requestSpec, callPath, DEFAULT_STATUS_CODE_DELETE);
+    }
+/*
 
     public Response getUserById(int userId) {
         return given()
@@ -21,5 +161,5 @@ public class ApiWrapper {
                 .thenReturn();
     }
 
-    // Add other methods for different API actions
+    // Add other methods for different API actions */
 }

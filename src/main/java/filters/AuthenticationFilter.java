@@ -6,11 +6,11 @@ import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
 
-public class AuthentificationFilter implements Filter {
+public class AuthenticationFilter implements Filter {
 
     private final String token;
 
-    public AuthentificationFilter(String token) {
+    public AuthenticationFilter(String token) {
         this.token = token;
     }
 
