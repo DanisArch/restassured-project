@@ -13,9 +13,17 @@ public class DataHelper {
 
     static Faker faker = new Faker();
 
+    public static User createTestUser() {
+        User user = new User();
+        user.setName(Config.getConfig("name"));
+        user.setEmail(Config.getConfig("email"));
+        user.setPassword(Config.getConfig("password"));
+        return user;
+    }
+
     public static User createUser() {
         User user = new User();
-        user.setName(faker.name().firstName() + faker.name().lastName() + now());
+        user.setName(faker.name().firstName());
         user.setEmail(faker.internet().emailAddress());
         user.setPassword(faker.internet().password());
         return user;
