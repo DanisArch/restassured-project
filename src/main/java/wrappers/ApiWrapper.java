@@ -19,7 +19,7 @@ public class ApiWrapper {
 
     private final static int DEFAULT_STATUS_CODE_GET = 200;
     private final static int DEFAULT_STATUS_CODE_PATCH = 200;
-    private final static int DEFAULT_STATUS_CODE_POST = 400;
+    private final static int DEFAULT_STATUS_CODE_POST = 200;
     private final static int DEFAULT_STATUS_CODE_PUT = 200;
     private final static int DEFAULT_STATUS_CODE_DELETE = 204;
     private final static String TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyMzI3fSwiaWF0IjoxNzI3MzY2NTM5LCJleHAiOjE3Mjc3MjY1Mzl9.YmHPg0a5DUOpJmCG13K5U_L2emHpRIAs5X7F7uH6ClI";

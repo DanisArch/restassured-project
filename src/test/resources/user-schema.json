@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the user"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the user"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address of the user"
+    },
+    "password": {
+      "type": "string",
+      "description": "Hashed password of the user"
+    },
+    "avatar": {
+      "type": "string",
+      "description": "URL of the user's avatar"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when the user was created"
+    },
+    "google": {
+      "type": "string",
+      "description": "Google profile link"
+    },
+    "github": {
+      "type": "string",
+      "description": "GitHub profile link"
+    },
+    "facebook": {
+      "type": "string",
+      "description": "Facebook profile link"
+    },
+    "profileId": {
+      "type": "integer",
+      "description": "Identifier for the user's profile"
+    }
+  },
+  "required": ["id", "name", "email", "password", "date", "profileId"]
+}
