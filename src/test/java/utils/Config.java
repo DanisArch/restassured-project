@@ -25,35 +25,6 @@ public class Config {
         }
     }
 
-    public static int getID(String endPoint, String userId) {
-        String path = "[0]." + userId;
-        return
-                given()
-                        .when()
-                        .get(getConfig("baseURI") + getConfig(endPoint))
-                        .then()
-                        .statusCode(200)
-                        .log().ifValidationFails()
-                        .extract()
-                        .jsonPath()
-                        .getInt(path);
-    }
-
-    public static String getVolume(String endpoint, String name) {
-        String path = "[1]." + name;
-        return
-                given()
-                        .when()
-                        .get(getConfig("baseURI") +
-                                getConfig(endpoint))
-                        .then()
-                        .statusCode(200)
-                        .log().ifValidationFails()
-                        .extract()
-                        .jsonPath()
-                        .get(path);
-    }
-
     public static String getConfig(String key) {
         if(properties.isEmpty()){
             getProperties();

@@ -2,17 +2,13 @@ package tests;
 
 import dto.AuthenticationResponse;
 import dto.User;
-import filters.AuthenticationFilter;
-import io.restassured.response.Response;
 import utils.Config;
 import utils.DataHelper;
-import wrappers.ApiWrapper;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static utils.Config.getConfig;
@@ -35,7 +31,7 @@ public class UserTests extends ApiBaseTest {
                         User.class
                 );
         System.out.println(actualNewUserToken);
- //       assertNotNull(actualnewUserToken.getToken());
+ //       assertNotNull(actualNewUserToken.getToken());
     }
 
     @Test
@@ -51,7 +47,7 @@ public class UserTests extends ApiBaseTest {
                         User.class
                 );
 
-        assertEquals(actualTestUserMsg, Config.getConfig("CreateTestUserMsg"));
+        assertEquals(actualTestUserMsg.toString(), Config.getConfig("CreateTestUserMsg"));
    /*     String token = ApiWrapper.sendPatchRequest().jsonPath().getString("token");
         String authToken = token;*/
     }
