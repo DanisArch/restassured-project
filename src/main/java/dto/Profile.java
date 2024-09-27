@@ -16,9 +16,9 @@ public class Profile {
     private int userId;
     private String company;
     private String location;
-    private Date year;
+    private int year;
     private String status;
-    private String skills;
+
 
     @JsonSetter("userId")
     public void setUserId(int userId) {

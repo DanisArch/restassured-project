@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "company": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "location": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bio": {
+      "type": ["string", "null"]
+    },
+    "githubusername": {
+      "type": "string"
+    },
+    "social": {
+      "type": "object",
+      "properties": {
+        "youtube": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        }
+      },
+      "required": ["youtube", "twitter", "facebook", "linkedin", "instagram"]
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "userId": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "google": {
+          "type": "string"
+        },
+        "github": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "integer"
+        }
+      },
+      "required": ["id", "name", "email", "password", "avatar", "date", "google", "github", "facebook", "profileId"]
+    },
+    "experience": {
+      "type": "array",
+      "items": {}
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "school": {
+            "type": "string"
+          },
+          "degree": {
+            "type": "string"
+          },
+          "fieldofstudy": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "current": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "school", "degree", "fieldofstudy", "from", "to", "current", "description"]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "company",
+    "website",
+    "year",
+    "location",
+    "status",
+    "skills",
+    "bio",
+    "githubusername",
+    "social",
+    "date",
+    "userId",
+    "user",
+    "experience",
+    "education"
+  ]
+}

@@ -141,6 +141,18 @@ public class ApiWrapper {
                 .log().ifValidationFails();
     }
 
+    public static Response sendGetListRequest(String callPath,
+                                              int statusCode) {
+        return given()
+                .when()
+                .get(callPath)
+                .then()
+                .statusCode(statusCode)
+                .contentType(ContentType.JSON)
+                .log().ifValidationFails()
+                .extract().response();
+    }
+
     public static ValidatableResponse sendGetRequest(String callPath, int statusCode) {
         return sendGetRequest(given(), callPath, statusCode);
     }
@@ -153,10 +165,10 @@ public class ApiWrapper {
         return sendGetRequest(given(), callPath, DEFAULT_STATUS_CODE_GET);
     }
 
-    public static void deleteRequest(RequestSpecification requestSpec,
+    public static ValidatableResponse deleteRequest(RequestSpecification requestSpec,
                                      String callPath,
                                      int statusCode) {
-        given()
+     return    given()
                 .filter(new AuthenticationFilter(TOKEN))
                 .spec(requestSpec)
                 .when()
@@ -166,26 +178,7 @@ public class ApiWrapper {
                 .statusCode(statusCode);
     }
 
-    public static void deleteRequest(RequestSpecification requestSpec, String callPath) {
-        deleteRequest(requestSpec, callPath, DEFAULT_STATUS_CODE_DELETE);
+    public static ValidatableResponse deleteRequest(RequestSpecification requestSpec, String callPath) {
+      return  deleteRequest(requestSpec, callPath, DEFAULT_STATUS_CODE_DELETE);
     }
-
-/*
-
-    public Response getUserById(int userId) {
-        return given()
-                .pathParam("id", userId)
-                .when()
-                .get("/profile/user/{id}")
-                .thenReturn();
-    }
-
-    public Response createUser(User user) {
-        return given()
-                .body(user)
-                .post("/users")
-                .thenReturn();
-    }
-
-    // Add other methods for different API actions */
 }

@@ -25,8 +25,8 @@ public class Config {
         }
     }
 
-    public static int getID(String endPoint, String nameId) {
-        String path = "[0]." + nameId;
+    public static int getID(String endPoint, String userId) {
+        String path = "[0]." + userId;
         return
                 given()
                         .when()
@@ -37,19 +37,6 @@ public class Config {
                         .extract()
                         .jsonPath()
                         .getInt(path);
-    }
-
-    public static Response getListId(String endpoint) {
-
-        return given()
-                .when()
-                .get(getConfig("baseURI") +
-                        getConfig(endpoint))
-                .then()
-                .statusCode(200)
-                .log().ifValidationFails()
-                .extract()
-                .response();
     }
 
     public static String getVolume(String endpoint, String name) {

@@ -27,14 +27,14 @@ public class UserTests extends ApiBaseTest {
     public void RegisterNewUser() {
         User newUser = DataHelper.createUser();
 
-        User actualnewUserToken =
+        User actualNewUserToken =
                 sendPostRequest(
                         getConfig("baseURI")
                                 + getConfig("endPointRegisterUsers"),
                         newUser,
                         User.class
                 );
-        System.out.println(actualnewUserToken);
+        System.out.println(actualNewUserToken);
  //       assertNotNull(actualnewUserToken.getToken());
     }
 
@@ -89,7 +89,6 @@ public class UserTests extends ApiBaseTest {
 
     @Test
     public void schemeTestUserValidation() {
- //       String testUser = getId("endPointUsers", "id");
         sendGetRequest(
                 given().headers("x-auth-token",Config.getConfig("token")),
                 getConfig("baseURI")

@@ -7,8 +7,6 @@ import dto.Experience;
 import dto.Education;
 import dto.Post;
 
-import static java.time.LocalDateTime.now;
-
 public class DataHelper {
 
     static Faker faker = new Faker();
@@ -34,9 +32,8 @@ public class DataHelper {
         profile.setUserId(userID);
         profile.setCompany(faker.company().name());
         profile.setLocation(faker.address().country());
-        profile.setYear(faker.date().birthday(18,65));
+        profile.setYear(faker.number().numberBetween(2, 7));
         profile.setStatus(faker.job().title());
-        profile.setSkills(faker.job().keySkills());
         return  profile;
     }
 
